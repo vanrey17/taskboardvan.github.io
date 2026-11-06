@@ -6,53 +6,25 @@ import { KanbanColumn } from '@/components/KanbanColumn';
 import { TaskTableView } from '@/components/TaskTableView';
 import { TaskModal } from '@/components/TaskModal';
 import { DeleteModal } from '@/components/DeleteModal';
-import { 
-  Plus, 
-  Search, 
-  LayoutGrid, 
-  List, 
-  Clock, 
-  Zap, 
-  CheckCircle2, 
-  Database, 
-  HardDrive, 
-  Download, 
-  Upload, 
-  Check, 
-  AlertCircle 
+import {
+  Plus,
+  Search,
+  LayoutGrid,
+  List,
+  Clock,
+  Zap,
+  CheckCircle2,
+  Database,
+  HardDrive,
+  Download,
+  Upload,
+  Check,
+  AlertCircle
 } from 'lucide-react';
 
 const LOCAL_STORAGE_KEY = 'taskboard_tasks_v2';
 
-const SEED_TASKS: Task[] = [
-  {
-    id: 'seed-1',
-    title: 'Desain Layout & Arsitektur Taskboard',
-    dueDate: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0],
-    status: 'done',
-    description: 'Menyusun wireframe Kanban board 3 kolom dan skema database.',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: 'seed-2',
-    title: 'Migrasi ke Next.js & Siap Hosting Vercel',
-    dueDate: new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
-    status: 'sedang dikerjakan',
-    description: 'Tahap 85%: Pengujian komponen Kanban drag & drop, API routes, dan build production.',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: 'seed-3',
-    title: 'Hubungkan ke Database PostgreSQL (Neon / Supabase)',
-    dueDate: new Date(Date.now() + 86400000 * 5).toISOString().split('T')[0],
-    status: 'belum dikerjakan',
-    description: 'Menambahkan DATABASE_URL di environment variables Vercel untuk sinkronisasi cloud.',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-];
+const SEED_TASKS: Task[] = [];
 
 export default function TaskBoardPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -188,13 +160,13 @@ export default function TaskBoardPage() {
       const updatedList = tasks.map((t) =>
         t.id === taskData.id
           ? {
-              ...t,
-              title: taskData.title,
-              dueDate: taskData.dueDate,
-              status: taskData.status,
-              description: taskData.description,
-              updatedAt: now,
-            }
+            ...t,
+            title: taskData.title,
+            dueDate: taskData.dueDate,
+            status: taskData.status,
+            description: taskData.description,
+            updatedAt: now,
+          }
           : t
       );
       setTasks(updatedList);
@@ -352,11 +324,10 @@ export default function TaskBoardPage() {
           <div className="flex items-center gap-2.5">
             {/* Database / Storage Pill */}
             <div
-              className={`hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${
-                isDbConnected
-                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                  : 'bg-amber-50 text-amber-700 border-amber-200'
-              }`}
+              className={`hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${isDbConnected
+                ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                : 'bg-amber-50 text-amber-700 border-amber-200'
+                }`}
               title={
                 isDbConnected
                   ? 'Tersambung ke database cloud PostgreSQL'
@@ -498,11 +469,10 @@ export default function TaskBoardPage() {
             <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
               <button
                 onClick={() => setViewMode('kanban')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-                  viewMode === 'kanban'
-                    ? 'bg-white text-indigo-600 shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${viewMode === 'kanban'
+                  ? 'bg-white text-indigo-600 shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
+                  }`}
                 title="Tampilan Papan Kanban"
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
@@ -510,11 +480,10 @@ export default function TaskBoardPage() {
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-                  viewMode === 'list'
-                    ? 'bg-white text-indigo-600 shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${viewMode === 'list'
+                  ? 'bg-white text-indigo-600 shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
+                  }`}
                 title="Tampilan Tabel List"
               >
                 <List className="w-3.5 h-3.5" />
