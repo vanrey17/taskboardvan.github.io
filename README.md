@@ -1,83 +1,96 @@
-# 📋 Modern TaskBoard (CRUD PHP, HTML, CSS, JS & Database)
+# 📋 TaskBoard (Next.js & Vercel Ready)
 
-Aplikasi Taskboard berbasis Kanban modern, simpel, rapi, dan responsif dengan fitur CRUD lengkap untuk mencatat tugas, deadline tanggal, status pengerjaan, dan catatan keterangan progres (update sampai tahap mana).
+Aplikasi Taskboard Kanban modern berbasis **Next.js (App Router)**, **React**, **TypeScript**, dan **Tailwind CSS**. Dilengkapi fitur CRUD lengkap, target tanggal/deadline, status pengerjaan, dan catatan tahap progres yang tersimpan aman ke database serta siap langsung di-deploy ke **Vercel**.
+
+---
 
 ## ✨ Fitur Utama
 1. **CRUD Lengkap**:
-   - **Create**: Tambah tugas baru dengan nama tugas, target tanggal selesai, status, dan keterangan progres.
-   - **Read**: Tampilan interaktif papan Kanban 3 kolom (*Belum Dikerjakan*, *Sedang Dikerjakan*, *Done*) serta toggle ke Tampilan Tabel/List.
-   - **Update**: Edit tugas melalui modal interaktif atau langsung ubah status dengan cepat.
+   - **Create**: Tambah tugas baru dengan nama tugas, target tanggal, status, dan keterangan progres.
+   - **Read**: Papan Kanban 3 Kolom (*Belum Dikerjakan*, *Sedang Dikerjakan*, *Done*) & Toggle ke Tampilan Tabel.
+   - **Update**: Edit tugas lewat modal dialog atau ganti status secara instan via Drag & Drop.
    - **Delete**: Hapus tugas dengan dialog konfirmasi aman.
 2. **Drag & Drop Interaktif**:
-   - Kartu tugas dapat di-drag & drop langsung antar kolom Kanban untuk mengubah status secara real-time.
-   - Tersedia juga pemilih status cepat (*quick select*) pada setiap kartu untuk pengguna mobile / touchscreen.
-3. **Database Tersimpan Aman (Persistent)**:
-   - **SQLite (Default - Langsung Jalan)**: Tidak perlu membuat database manual di phpMyAdmin. File database tersimpan otomatis di `database.sqlite` dan tidak akan hilang saat browser ditutup.
-   - **MySQL Support**: Tersedia opsi beralih ke MySQL di Laragon/XAMPP hanya dengan mengganti 1 baris pengaturan di `config.php`.
-4. **Dashboard & Statistik Real-Time**:
-   - Menghitung otomatis total tugas, jumlah tugas belum dikerjakan, sedang dikerjakan, dan selesai.
-   - Progress Bar persentase penyelesaian proyek.
-5. **Pencarian & Filter Cepat**:
-   - Filter berdasarkan status atau cari tugas berdasarkan nama / catatan keterangan secara instan tanpa reload halaman.
-6. **UI/UX Bersih & Rapi**:
-   - Desain minimalis modern berbasis Tailwind-inspired design tokens.
-   - Badge tanggal pintar (indikator *Hari Ini*, *Besok*, atau *Terlewat* warna merah jika melewati deadline).
-   - Animasi transisi halus dan notifikasi toast saat ada perubahan.
+   - Pindahkan kartu tugas antar kolom status secara langsung dengan animasi mulus.
+   - Tersedia juga pemilih status cepat (*quick select*) di setiap kartu untuk perangkat layar sentuh / mobile.
+3. **Database & Penyimpanan Aman (Tidak Hilang Saat Ditutup)**:
+   - **Otomatis Tersimpan di Browser (LocalStorage)**: Langsung berjalan tanpa setup apa pun. Data tetap tersimpan rapi dan tidak akan hilang saat browser ditutup atau direfresh.
+   - **Cloud PostgreSQL Ready (Vercel / Neon / Supabase)**: Cukup pasang environment variable `DATABASE_URL` di Vercel atau file `.env.local`, aplikasi akan otomatis membuat tabel dan menyinkronkan data ke PostgreSQL!
+   - **Fitur Export & Import JSON**: Cadangkan atau pulihkan data tugas Anda kapan saja hanya dengan 1 klik.
+4. **Desain Bersih, Rapi & Responsif (UI/UX)**:
+   - Tampilan modern berbasis Tailwind CSS & ikon Lucide.
+   - Indikator tanggal pintar (*Terlewat* warna merah, *Hari Ini* warna kuning, *Besok*, dll.).
+   - Kotak highlight keterangan tahap progres.
+   - Pencarian instan (*real-time search*) dan filter status.
+   - Bar persentase penyelesaian proyek otomatis.
 
 ---
 
-## 🚀 Cara Menjalankan
+## 🚀 Menjalankan di Komputer Lokal
 
-### Cara 1: Menggunakan Laragon (Rekomendasi)
-Karena folder projek berada di `C:\laragon\www\taskboard`:
-1. Buka aplikasi **Laragon**.
-2. Klik tombol **Start All**.
-3. Buka browser dan kunjungi salah satu URL berikut:
-   - [http://localhost/taskboard](http://localhost/taskboard)
-   - atau [http://taskboard.test](http://taskboard.test) (jika fitur virtual host Laragon aktif).
+1. **Install dependensi** (jika belum):
+   ```bash
+   npm install
+   ```
+2. **Jalankan development server**:
+   ```bash
+   npm run dev
+   ```
+3. Buka browser di [http://localhost:3000](http://localhost:3000).
 
-### Cara 2: Menggunakan PHP Built-in Server
-Jika ingin menjalankan langsung dari terminal tanpa web server penuh:
+---
+
+## 🌐 Cara Deploy ke Vercel
+
+Projek ini sudah **100% siap untuk Vercel**! Anda bisa mendeploynya dengan salah satu cara berikut:
+
+### Opsi A: Lewat Vercel Dashboard (Rekomendasi)
+1. Push repository ini ke **GitHub**, **GitLab**, atau **Bitbucket**.
+2. Buka [https://vercel.com](https://vercel.com) dan login.
+3. Klik **"Add New Project"** lalu pilih repository Anda.
+4. Framework Preset akan otomatis terdeteksi sebagai **Next.js**.
+5. Klik **"Deploy"**!
+
+### Opsi B: Menggunakan Vercel CLI
 ```bash
-cd c:\laragon\www\taskboard
-php -S localhost:8000
+npm i -g vercel
+vercel
 ```
-Lalu buka browser di [http://localhost:8000](http://localhost:8000).
 
 ---
 
-## 🗄️ Konfigurasi Database (SQLite vs MySQL)
+## 🗄️ Menghubungkan ke Cloud Database di Vercel (Opsional)
 
-Buka file `config.php`:
-```php
-// Pilihan: 'sqlite' (bawaan) atau 'mysql'
-define('DB_DRIVER', 'sqlite');
-```
+Aplikasi sudah dapat berjalan dan menyimpan data secara otomatis di browser tanpa database eksternal. 
 
-- **SQLite (Bawaan)**: 
-  Sangat praktis, data otomatis tersimpan di file `database.sqlite` di dalam folder ini.
-- **MySQL**:
-  Jika Anda ingin menggunakan MySQL di Laragon:
-  1. Ubah `define('DB_DRIVER', 'mysql');` di `config.php`.
-  2. Sistem akan otomatis membuat database `taskboard_db` dan tabel `tasks` bila belum ada.
-  3. File SQL manual juga sudah disediakan di file `database.sql`.
+Namun jika Anda ingin data tersinkronisasi antar perangkat atau multi-user di cloud:
+1. Di dashboard projek Vercel Anda, buka tab **Storage** lalu buat database **PostgreSQL (Neon / Vercel Postgres / Supabase)**.
+2. Hubungkan database tersebut ke projek Anda. Vercel akan otomatis menyuntikkan environment variable `DATABASE_URL` / `POSTGRES_URL`.
+3. Aplikasi akan otomatis mendeteksi koneksi tersebut, membuat tabel `tasks`, dan menyimpan data langsung ke PostgreSQL!
 
 ---
 
-## 📂 Struktur File
+## 📁 Struktur Projek Next.js
 ```
-c:\laragon\www\taskboard\
-│
-├── index.php             # Antarmuka utama (Kanban, Toolbar, Modal)
-├── config.php            # Konfigurasi database & driver
-├── db.php                # Koneksi PDO & auto-migration database
-├── api.php               # Endpoint JSON REST API (CRUD & update status)
-├── database.sql          # Skema database MySQL
-├── database.sqlite       # Database SQLite lokal (dibuat otomatis)
-├── assets/
-│   ├── css/
-│   │   └── style.css     # Styling tampilan modern & responsif
-│   └── js/
-│       └── app.js        # Logika Drag-and-Drop, AJAX CRUD, search & filter
-└── README.md             # Dokumentasi
+taskboard/
+├── app/
+│   ├── api/
+│   │   └── tasks/
+│   │       ├── route.ts         # GET (list) & POST (create)
+│   │       └── [id]/route.ts    # PUT (update) & DELETE (remove)
+│   ├── globals.css              # Styling Tailwind CSS
+│   ├── layout.tsx               # Root layout & font
+│   └── page.tsx                 # Halaman utama TaskBoard
+├── components/
+│   ├── TaskCard.tsx             # Kartu tugas & drag-and-drop
+│   ├── KanbanColumn.tsx         # Kolom status Kanban
+│   ├── TaskModal.tsx            # Modal Tambah/Edit tugas
+│   ├── DeleteModal.tsx          # Modal konfirmasi hapus
+│   └── TaskTableView.tsx        # Tampilan alternatif tabel
+├── lib/
+│   └── db.ts                    # Driver koneksi cloud PostgreSQL (pg)
+├── types/
+│   └── task.ts                  # TypeScript types & interface
+├── package.json
+└── README.md
 ```
